@@ -11,7 +11,7 @@ import SwiftUI
 struct SpanningTreeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().navigationTitle("最小生成树的生成      燕山大学算法设计与分析三级项目      2023.10.19")
         }
     }
 }

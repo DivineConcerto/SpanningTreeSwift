@@ -7,10 +7,10 @@
 import SwiftUI
 
 struct OriginalGraphView: View {
-    var matrix: [[Int]]
+    var matrix: [[Double]]
     let nodesCount: Int
 
-    init(matrix: [[Int]]) {
+    init(matrix: [[Double]]) {
         self.matrix = matrix
         self.nodesCount = matrix.count
     }
@@ -21,10 +21,10 @@ struct OriginalGraphView: View {
                 // Draw edges
                 ForEach(0..<nodesCount, id: \.self) { i in
                     ForEach(0..<nodesCount, id: \.self) { j in
-                        if matrix[i][j] != Int.max {
+                        if matrix[i][j] != 9999 {
                             let start = self.position(for: i, in: geometry.size)
                             let end = self.position(for: j, in: geometry.size)
-                            EdgeView(start: start, end: end, weight: matrix[i][j])
+                            EdgeView(start: start, end: end, weight: Double(matrix[i][j]))
                         }
                     }
                 }

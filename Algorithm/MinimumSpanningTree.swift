@@ -12,7 +12,7 @@ import Foundation
 struct Edge: Hashable {
     let u: Int  // 起点
     let v: Int  // 终点
-    let weight: Int  // 权重（即距离）
+    let weight: Double  // 权重（即距离）
     var description:String{
         return "Building \(u) to Building \(v) with Distance \(weight)"
     }
@@ -20,17 +20,21 @@ struct Edge: Hashable {
 
 class MinimumSpanningTree {
     
-    func primAlgorithm(matrix: [[Int]]) -> [Edge] {
+    func primAlgorithm(matrix: [[Double]]) -> [Edge] {
+        // 顶点的数量
         let numVertices = matrix.count
+        // 判断是否经过该顶点
         var visited = [Bool](repeating: false, count: numVertices)
-        var result = [Edge]()  // 存储结果的数组，每个元素是一个Edge结构体
+        // 存储结果的数组，每个元素是一个Edge结构体
+        var result = [Edge]()
         
         // 从顶点0开始
         visited[0] = true
         
         // 遍历所有顶点，找到最小生成树的边
         for _ in 0..<numVertices - 1 {
-            var minWeight = Int.max
+            // 9999是最大值
+            var minWeight:Double = 9999
             var u = 0
             var v = 0
             
@@ -47,7 +51,8 @@ class MinimumSpanningTree {
             }
             
             visited[v] = true
-            result.append(Edge(u: u, v: v, weight: minWeight))
+            // 核心在于每次在选到最近点路之后，将终点置为已访问，下一轮从终点开始
+            result.append(Edge(u: u, v: v, weight: Double(minWeight)))
         }
         
         return result

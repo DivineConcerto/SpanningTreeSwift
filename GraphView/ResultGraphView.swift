@@ -29,13 +29,13 @@ extension Color {
 
 struct ResultGraphView: View {
     var result: [Edge]
-    var matrix: [[Int]]
+    var matrix: [[Double]]
     let nodesCount: Int
     let startColor = Color(red: 0.0, green: 0.7, blue: 1.0)  // Light blue
     let endColor = Color(red: 1.0, green: 0.5, blue: 0.0)  // Dark orange
 
 
-    init(result: [Edge], matrix: [[Int]]) {
+    init(result: [Edge], matrix: [[Double]]) {
         self.result = result
         self.matrix = matrix
         self.nodesCount = matrix.count
@@ -47,7 +47,7 @@ struct ResultGraphView: View {
                 // Draw edges
                 ForEach(0..<nodesCount, id: \.self) { i in
                     ForEach(0..<nodesCount, id: \.self) { j in
-                        if matrix[i][j] != Int.max {
+                        if matrix[i][j] != 9999 {
                             let isEdgeInResult = result.contains { edge in
                                 (edge.u == i && edge.v == j) || (edge.u == j && edge.v == i)
                             }
@@ -55,11 +55,11 @@ struct ResultGraphView: View {
                             let color = lerp(from: startColor, to: endColor, fraction: colorFraction)
                             let start = self.position(for: i, in: geometry.size)
                             let end = self.position(for: j, in: geometry.size)
-                            if isEdgeInResult {
-                                EdgeView(start: start, end: end, weight: matrix[i][j], color: color)
-                            } else {
-                                EdgeView(start: start, end: end, weight: matrix[i][j], color: .white)
-                            }
+//                            if isEdgeInResult {
+//                                EdgeView(start: start, end: end, weight: Double(matrix[i][j]), color: color)
+//                            } else {
+//                                EdgeView(start: start, end: end, weight: matrix[i][j], color: .white)
+//                            }
                         }
                     }
                 }

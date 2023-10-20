@@ -8,13 +8,13 @@
 import Foundation
 
 struct Kruskal {
-    static func minimumSpanningTree(matrix: [[Int]]) -> [Edge] {
+    static func minimumSpanningTree(matrix: [[Double]]) -> [Edge] {
         var edges = [Edge]()
         let nodesCount = matrix.count
         for i in 0..<nodesCount {
             for j in i+1..<nodesCount {
-                if matrix[i][j] != Int.max {
-                    edges.append(Edge(u: i, v: j, weight: matrix[i][j]))
+                if matrix[i][j] != 9999 {
+                    edges.append(Edge(u: i, v: j, weight: Double(matrix[i][j])))
                 }
             }
         }
